@@ -2,6 +2,8 @@
 Gilded Rose Requirements Specification
 ======================================
 
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/Abdelwahab313/gilded-rose-java/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/Abdelwahab313/gilded-rose-java/tree/main)
+
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a
 prominent city ran by a friendly innkeeper named Allison. We also buy and sell only the finest goods.
 Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We
