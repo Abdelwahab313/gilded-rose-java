@@ -9,6 +9,7 @@ class GildedRoseTest {
     private static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
     private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
     private static final String NORMAL_ITEM = "foo";
+    private static final String CONJURED = "Conjured";
 
 
     @Test
@@ -186,5 +187,60 @@ class GildedRoseTest {
         assertEquals(0, items[0].quality);
     }
 
+    @Test
+    void testUpdateQualityForConjuredItem() {
+        Item[] items = new Item[] { new Item(CONJURED, 10, 20) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(9, app.items[0].sellIn);
+        assertEquals(18, app.items[0].quality);
+    }
+
+    @Test
+    void testUpdateQualityForConjuredItemPastSellIn() {
+        Item[] items = new Item[] { new Item(CONJURED, 0, 20) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(-1, app.items[0].sellIn);
+        assertEquals(16, app.items[0].quality);
+    }
+
+    @Test
+    void testConjuredItemQualityNeverNegative() {
+        Item[] items = new Item[] { new Item(CONJURED, 5, 1) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(4, app.items[0].sellIn);
+        assertEquals(0, app.items[0].quality);
+    }
+
+    @Test
+    void testConjuredItemUpdateQualityMultipleDays() {
+        Item[] items = new Item[] { new Item(CONJURED, 3, 10) };
+        GildedRose app = new GildedRose(items);
+
+        for (int i = 0; i < 5; i++) {
+            app.updateQuality();
+        }
+
+        assertEquals(-2, items[0].sellIn);
+        assertEquals(0, items[0].quality);
+    }
+
+    @Test
+    void testConjuredItemWithNormalItemSimultaneously() {
+        Item[] items = new Item[] {
+                new Item(NORMAL_ITEM, 10, 20),
+                new Item(CONJURED, 10, 20)
+        };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+
+        assertEquals(9, items[0].sellIn);
+        assertEquals(19, items[0].quality);
+
+        assertEquals(9, items[1].sellIn);
+        assertEquals(18, items[1].quality);
+    }
 
 }

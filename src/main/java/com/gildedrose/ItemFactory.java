@@ -12,6 +12,8 @@ public class ItemFactory {
                 return new BackstagePassStrategy();
             case "Sulfuras, Hand of Ragnaros":
                 return new SulfurasStrategy();
+            case "Conjured":
+                return new ConjuredStrategy();
             default:
                 return new StandardItemStrategy();
         }
