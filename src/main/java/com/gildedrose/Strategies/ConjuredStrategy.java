@@ -11,6 +11,8 @@ public class ConjuredStrategy extends AbstractItemUpdateStrategy {
 
     @Override
     protected void updateQualityAfterSellInPassed(Item item) {
+        decreaseQuality(item);
+        decreaseQuality(item);
     }
 
 }
