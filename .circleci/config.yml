@@ -1,0 +1,41 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk # Matching your Java 1.8 version
+    steps:
+      - checkout
+
+      # Restore the Maven cache
+      - restore_cache:
+          keys:
+            - maven-{{ checksum "pom.xml" }}
+            - maven-
+
+      # Download and cache dependencies
+      - run:
+          name: Install dependencies
+          command: mvn dependency:go-offline -B
+
+      # Save the Maven cache
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: maven-{{ checksum "pom.xml" }}
+
+      # Compile the code
+      - run:
+          name: Compile the project
+          command: mvn compile
+
+      # Run tests
+      - run:
+          name: Run tests
+          command: mvn test
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
