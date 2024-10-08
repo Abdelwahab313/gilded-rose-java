@@ -1,5 +1,7 @@
 package com.gildedrose;
 
+import com.gildedrose.Strategies.QualityUpdateRule;
+
 public class Item {
 
     public String name;
@@ -8,14 +10,27 @@ public class Item {
 
     public int quality;
 
+    QualityUpdateRule updateRule;
+
     public Item(String name, int sellIn, int quality) {
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
     }
 
-   @Override
-   public String toString() {
+    public Item(String name, int sellIn, int quality, QualityUpdateRule updateRule) {
+        this.name = name;
+        this.sellIn = sellIn;
+        this.quality = quality;
+        this.updateRule = updateRule;
+    }
+
+    @Override
+    public String toString() {
         return this.name + ", " + this.sellIn + ", " + this.quality;
+    }
+
+    public void updateQuality() {
+        updateRule.updateQuality(this);
     }
 }
