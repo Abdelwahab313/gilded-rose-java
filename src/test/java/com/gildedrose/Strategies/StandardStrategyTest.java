@@ -4,7 +4,7 @@ import com.gildedrose.Item;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class GildedRoseStandardStrategyTest {
+class StandardStrategyTest {
     @Test
     void standardItemDecreasesInQuality() {
         Item item = new Item("Standard Item", 10, 20, new StandardItemStrategy());

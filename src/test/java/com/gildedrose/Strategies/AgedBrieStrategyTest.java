@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class GildedRoseAgedBrieStrategyTest {
+class AgedBrieStrategyTest {
     @Test
     void agedBrieIncreasesInQuality() {
         Item item = new Item("Aged Brie", 2, 0, new AgedBrieStrategy());
