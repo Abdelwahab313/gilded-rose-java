@@ -2,7 +2,7 @@ package com.gildedrose.Strategies;
 
 import com.gildedrose.Item;
 
-class StandardItemStrategy implements QualityUpdateRule {
+public class StandardItemStrategy implements QualityUpdateRule {
     @Override
     public void updateQuality(Item item) {
         if (item.quality > 0) {

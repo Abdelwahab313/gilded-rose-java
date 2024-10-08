@@ -2,7 +2,7 @@ package com.gildedrose.Strategies;
 
 import com.gildedrose.Item;
 
-class AgedBrieStrategy implements QualityUpdateRule {
+public class AgedBrieStrategy implements QualityUpdateRule {
     @Override
     public void updateQuality(Item item) {
         if (item.quality < 50) {
