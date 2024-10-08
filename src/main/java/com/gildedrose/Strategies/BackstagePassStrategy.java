@@ -2,22 +2,20 @@ package com.gildedrose.Strategies;
 
 import com.gildedrose.Item;
 
-public class BackstagePassStrategy implements QualityUpdateRule {
+public class BackstagePassStrategy extends AbstractItemUpdateStrategy {
     @Override
-    public void updateQuality(Item item) {
-        if (item.sellIn <= 0) {
-            item.quality = 0;
-        } else {
-            if (item.quality < 50) {
-                item.quality++;
-                if (item.sellIn <= 10) {
-                    if (item.quality < 50) item.quality++;
-                }
-                if (item.sellIn <= 5) {
-                    if (item.quality < 50) item.quality++;
-                }
-            }
+    protected void updateQualityBeforeSellInPassed(Item item) {
+        increaseQuality(item);
+        if (item.sellIn < 11) {
+            increaseQuality(item);
         }
-        item.sellIn--;
+        if (item.sellIn < 6) {
+            increaseQuality(item);
+        }
+    }
+
+    @Override
+    protected void updateQualityAfterSellInPassed(Item item) {
+        item.quality = 0;
     }
 }

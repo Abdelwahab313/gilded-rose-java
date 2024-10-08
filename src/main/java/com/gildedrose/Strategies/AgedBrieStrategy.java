@@ -2,15 +2,15 @@ package com.gildedrose.Strategies;
 
 import com.gildedrose.Item;
 
-public class AgedBrieStrategy implements QualityUpdateRule {
+public class AgedBrieStrategy extends AbstractItemUpdateStrategy {
     @Override
-    public void updateQuality(Item item) {
-        if (item.quality < 50) {
-            item.quality++;
-            if (item.sellIn <= 0 && item.quality < 50) {
-                item.quality++;
-            }
-        }
-        item.sellIn--;
+    protected void updateQualityBeforeSellInPassed(Item item) {
+        increaseQuality(item);
     }
+
+    @Override
+    protected void updateQualityAfterSellInPassed(Item item) {
+        increaseQuality(item);
+    }
+
 }
